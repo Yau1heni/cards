@@ -27,7 +27,7 @@ export const authAPI = {
 export type CreateUserDataType = {
   email: string
   password: string
-  rememberMe: boolean
+  rememberMe?: boolean
 }
 
 export type UserType = {

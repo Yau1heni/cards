@@ -6,7 +6,7 @@ import { Profile } from '../../features/profile/Profile'
 
 export const PATH = {
   SIGN_UP: '/signup',
-  SIGN_IN: '/signIN',
+  SIGN_IN: '/signin',
   PROFILE: '/profile',
   NOT_FOUND: '/404',
 }
@@ -14,7 +14,7 @@ export const PATH = {
 export const Pages = () => {
   return (
     <Routes>
-      <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
+      <Route path={'/'} element={<Navigate to={PATH.SIGN_UP} />} />
 
       <Route path={PATH.SIGN_UP} element={<SignUp />} />
       <Route path={PATH.SIGN_IN} element={<SignIn />} />
