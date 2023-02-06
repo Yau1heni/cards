@@ -1,8 +1,13 @@
 import React from 'react'
 import './App.css'
+import { Pages } from './Pages/Pages'
 
 function App() {
-  return <div className="App">Cards</div>
+  return (
+    <div>
+      <Pages />
+    </div>
+  )
 }
 
 export default App

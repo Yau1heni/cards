@@ -1,6 +1,6 @@
 import { instance } from '../axiosSettings'
 
-export const userDataAPI = {
+export const authAPI = {
   registerUser(userData: CreateUserDataType) {
     return instance.post<ResponseRegister>('auth/register', userData)
   },
