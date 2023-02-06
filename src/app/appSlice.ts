@@ -2,6 +2,7 @@ import { authAPI } from '../api/authApi/authApi'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { setUserData } from '../features/profile/profileSlice'
 import { errorNetworkUtil } from '../common/utils/errorNetworkUtil'
+import { setLoggedIn } from '../features/auth/authSlice'
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
@@ -30,12 +31,12 @@ export const appSlice = createSlice({
 export const { setAppError, setAppStatus, setAppInitialized } = appSlice.actions
 export const appReducer = appSlice.reducer
 
-export const initializedAppTC = createAsyncThunk('app/initialized', async (arg, { dispatch }) => {
+export const initializedApp = createAsyncThunk('app/initialized', async (arg, { dispatch }) => {
   dispatch(setAppStatus('loading'))
   try {
     const res = await authAPI.me()
+    dispatch(setLoggedIn(true))
     dispatch(setUserData(res.data))
-    console.log(res.data)
     dispatch(setAppStatus('succeeded'))
   } catch (e: any) {
     errorNetworkUtil(e, dispatch)

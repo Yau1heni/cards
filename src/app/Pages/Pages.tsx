@@ -14,7 +14,7 @@ export const PATH = {
 export const Pages = () => {
   return (
     <Routes>
-      <Route path={'/'} element={<Navigate to={PATH.SIGN_UP} />} />
+      <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
 
       <Route path={PATH.SIGN_UP} element={<SignUp />} />
       <Route path={PATH.SIGN_IN} element={<SignIn />} />

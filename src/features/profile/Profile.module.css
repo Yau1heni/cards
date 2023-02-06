@@ -1,0 +1,16 @@
+.wrapper {
+  margin: auto;
+  max-width: 450px;
+  max-height: 320px;
+  text-align: center;
+}
+
+.avatar {
+  width: 96px;
+}
+
+.mail {
+  font-weight: 400;
+  font-size: 14px;
+}
+
