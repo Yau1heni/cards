@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.img {
+  width: 108px;
+}
