@@ -14,8 +14,8 @@ export const CheckEmailPage = () => {
       </div>
       <p>We’ve sent an Email with instructions to example@mail.com</p>
       <Button variant={'contained'}>
-        <Link style={{ textDecoration: 'none', color: 'white' }} to={'/login'}>
-          Back to login
+        <Link style={{ textDecoration: 'none', color: 'white' }} to={'/signin'}>
+          Back to Sign In
         </Link>
       </Button>
     </div>

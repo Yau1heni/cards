@@ -5,10 +5,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { register } from '../authSlice'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
 import { Title } from '../../../common/components/Title/Title'
 import FormControl from '@mui/material/FormControl'
+import Grid from '@mui/material/Grid'
 import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
@@ -66,11 +65,9 @@ export const SignUp = () => {
   }
 
   return (
-    <Grid container sx={{ justifyContent: 'center', marginTop: 6 }}>
+    <Grid container sx={{ justifyContent: 'center' }}>
       <Grid item sx={{ width: '40ch' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}>
-          <Title title={'Sign Up'} />
-        </Box>
+        <Title title={'Sign Up'} />
         <form onSubmit={formik.handleSubmit}>
           <FormControl fullWidth>
             <FormGroup>

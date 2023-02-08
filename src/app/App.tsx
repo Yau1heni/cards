@@ -20,7 +20,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="App">
       {status === 'loading' && <LinearProgress />}
       <Pages />
     </div>

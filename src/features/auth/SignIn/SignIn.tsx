@@ -57,11 +57,9 @@ export const SignIn = () => {
   }
 
   return (
-    <Grid container sx={{ justifyContent: 'center', marginTop: 6 }}>
+    <Grid container sx={{ justifyContent: 'center' }}>
       <Grid item sx={{ width: '40ch' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}>
-          <Title title={'Sign Up'} />
-        </Box>
+        <Title title={'Sign In'} />
         <form onSubmit={formik.handleSubmit}>
           <FormControl fullWidth>
             <FormGroup>
@@ -106,7 +104,7 @@ export const SignIn = () => {
                 }
               />
               <Grid item sx={{ display: 'flex', justifyContent: 'end' }}>
-                <Link to={'/forgotPassword'}>Forgot password?</Link>
+                <Link to={'/forgot'}>Forgot password?</Link>
               </Grid>
               <Button type={'submit'} variant={'contained'} color={'primary'} sx={{ mt: 3, mb: 2 }}>
                 Sign In
