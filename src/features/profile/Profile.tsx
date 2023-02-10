@@ -9,14 +9,12 @@ import Button from '@mui/material/Button'
 import { Title } from '../../common/components/Title/Title'
 import { updateUserData } from './profileSlice'
 import { EditableSpan } from '../../common/components/EditableSpan/EditableSpan'
-import { useNavigate } from 'react-router-dom'
+import { selectProfileUser } from '../../common/selectors/profileSelectors'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector((s) => s.auth.isLoggedIn)
-  const user = useAppSelector((s) => s.profile.userData)
+  const user = useAppSelector(selectProfileUser)
   const userAvatar = user.avatar ? user.avatar : avatar
-  const navigate = useNavigate()
 
   const changeNameHandler = (name: string | null) => {
     dispatch(updateUserData({ name }))
@@ -24,10 +22,6 @@ export const Profile = () => {
 
   const logoutHandler = () => {
     dispatch(logout())
-  }
-
-  if (!isLoggedIn) {
-    navigate('/signin')
   }
 
   return (

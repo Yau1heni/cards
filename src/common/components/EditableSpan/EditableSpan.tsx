@@ -34,9 +34,8 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = ({ name, changeName
         <>
           <TextField
             onChange={onChangeEditHandler}
-            value={newName !== null ? newName : 'name'}
+            value={newName ? newName : 'name'}
             label="enter name"
-            margin="none"
             size="small"
           />
           <Button variant={'outlined'} onClick={onClickEditHandler}>

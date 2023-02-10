@@ -17,10 +17,12 @@ import IconButton from '@mui/material/IconButton'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Button from '@mui/material/Button'
+import { selectAppIsRegistered } from '../../../common/selectors/appSelectors'
+import { PATH } from '../../../app/Pages/Pages'
 
 export const SignUp = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector((s) => s.auth.isLoggedIn)
+  const IsRegistered = useAppSelector(selectAppIsRegistered)
   const navigate = useNavigate()
 
   const validationSchema = yup.object({
@@ -60,8 +62,8 @@ export const SignUp = () => {
     event.preventDefault()
   }
 
-  if (isLoggedIn) {
-    navigate('/profile')
+  if (IsRegistered) {
+    navigate(PATH.PROFILE)
   }
 
   return (
@@ -134,7 +136,7 @@ export const SignUp = () => {
                 Sign In
               </Button>
               <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Link to={'/signin'}>{'Already have an account? Sign In'}</Link>
+                <Link to={PATH.SIGN_IN}>{'Already have an account? Sign In'}</Link>
               </Grid>
             </FormGroup>
           </FormControl>

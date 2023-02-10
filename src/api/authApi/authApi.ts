@@ -16,10 +16,10 @@ export const authAPI = {
   updateUserProfile(userData: UpdateUserProfileType) {
     return instance.put<ResponseUpdateUser>('auth/me', userData)
   },
-  sendRecoveryPasswordLink(passwordRecoveryData: PasswordRecoveryDataType) {
+  sendRecoveryPassword(passwordRecoveryData: PasswordRecoveryDataType) {
     return instance.post<ResponseRecoveryPassword>('auth/forgot', passwordRecoveryData)
   },
-  setNewPasswordUser(newPasswordData: NewPasswordDataType) {
+  setNewPassword(newPasswordData: NewPasswordDataType) {
     return instance.post<ResponseRecoveryPassword>('auth/set-new-password', newPasswordData)
   },
 }

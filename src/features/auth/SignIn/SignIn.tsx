@@ -5,7 +5,6 @@ import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import InputLabel from '@mui/material/InputLabel'
@@ -20,10 +19,12 @@ import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { login } from '../authSlice'
 import { useAppSelector } from '../../../common/hooks/useAppSelector'
 import { Link, useNavigate } from 'react-router-dom'
+import { PATH } from '../../../app/Pages/Pages'
+import { selectAppIsLoggedIn } from '../../../common/selectors/appSelectors'
 
 export const SignIn = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector((s) => s.auth.isLoggedIn)
+  const isLoggedIn = useAppSelector(selectAppIsLoggedIn)
   const navigate = useNavigate()
 
   const validationSchema = yup.object({
@@ -53,7 +54,7 @@ export const SignIn = () => {
   }
 
   if (isLoggedIn) {
-    navigate('/profile')
+    navigate(PATH.PROFILE)
   }
 
   return (
@@ -104,13 +105,13 @@ export const SignIn = () => {
                 }
               />
               <Grid item sx={{ display: 'flex', justifyContent: 'end' }}>
-                <Link to={'/forgot'}>Forgot password?</Link>
+                <Link to={PATH.FORGOT_PASSWORD}>Forgot password?</Link>
               </Grid>
               <Button type={'submit'} variant={'contained'} color={'primary'} sx={{ mt: 3, mb: 2 }}>
                 Sign In
               </Button>
               <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Link to={'/signup'}>{"Don't have an account? Sign Up"}</Link>
+                <Link to={PATH.SIGN_UP}>{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </FormGroup>
           </FormControl>
