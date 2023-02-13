@@ -54,7 +54,7 @@ export const SignIn = () => {
   }
 
   if (isLoggedIn) {
-    navigate(PATH.PROFILE)
+    navigate(PATH.PACKS)
   }
 
   return (

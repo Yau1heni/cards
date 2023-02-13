@@ -20,10 +20,12 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <>
       {status === 'loading' && <LinearProgress />}
-      <Pages />
-    </div>
+      <div className="App">
+        <Pages />
+      </div>
+    </>
   )
 }
 

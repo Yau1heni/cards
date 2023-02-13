@@ -86,3 +86,60 @@ export const getPacks = createAsyncThunk('packs/setPacks', async (_, { dispatch,
     dispatch(setAppStatus('idle'))
   }
 })
+
+// export const addNewPackTC = (newPackName: string): AppThunk => {
+//   return (dispatch) => {
+//     dispatch(setAppStatusAC('loading'))
+//     packAPI
+//       .postPack({ name: newPackName })
+//       .then(() => {
+//         dispatch(getPacksDataTC())
+//         dispatch(setAppStatusAC('succeeded'))
+//       })
+//       .catch((e: AxiosError<{ error: string }>) => {
+//         dispatch(setAppStatusAC('failed'))
+//         const error = e.response
+//           ? e.response.data.error
+//           : e.message + ', more details in the console'
+//         dispatch(setAppErrorAC(error))
+//       })
+//   }
+// }
+//
+// export const deletePackTC = (id: string): AppThunk => {
+//   return (dispatch) => {
+//     dispatch(setAppStatusAC('loading'))
+//     packAPI
+//       .deletePack(id)
+//       .then(() => {
+//         dispatch(getPacksDataTC())
+//         dispatch(setAppStatusAC('succeeded'))
+//       })
+//       .catch((e: AxiosError<{ error: string }>) => {
+//         dispatch(setAppStatusAC('failed'))
+//         const error = e.response
+//           ? e.response.data.error
+//           : e.message + ', more details in the console'
+//         dispatch(setAppErrorAC(error))
+//       })
+//   }
+// }
+//
+// export const updatePackTC = (cardsPack: CardPacksUpdateType): AppThunk => {
+//   return (dispatch) => {
+//     dispatch(setAppStatusAC('loading'))
+//     packAPI
+//       .updatePack(cardsPack)
+//       .then(() => {
+//         dispatch(getPacksDataTC())
+//         dispatch(setAppStatusAC('succeeded'))
+//       })
+//       .catch((e: AxiosError<{ error: string }>) => {
+//         dispatch(setAppStatusAC('failed'))
+//         const error = e.response
+//           ? e.response.data.error
+//           : e.message + ', more details in the console'
+//         dispatch(setAppErrorAC(error))
+//       })
+//   }
+// }

@@ -63,7 +63,7 @@ export const SignUp = () => {
   }
 
   if (IsRegistered) {
-    navigate(PATH.PROFILE)
+    navigate(PATH.PACKS)
   }
 
   return (
