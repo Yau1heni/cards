@@ -4,7 +4,7 @@ import {
   NewPasswordDataType,
   UserType,
 } from '../../api/authApi/authApi'
-import { setAppInitialized, setAppStatus } from '../../app/appSlice'
+import { setAppError, setAppInitialized, setAppStatus } from '../../app/appSlice'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { setUserData } from '../profile/profileSlice'
 import { errorNetworkUtil } from '../../common/utils/errorNetworkUtil'
@@ -48,6 +48,7 @@ export const login = createAsyncThunk(
 
       dispatch(setLoggedIn(true))
       dispatch(setAppStatus('succeeded'))
+      dispatch(setAppError(null))
     } catch (e: any) {
       errorNetworkUtil(e, dispatch)
     } finally {
@@ -66,6 +67,7 @@ export const register = createAsyncThunk(
 
       dispatch(setRegistration(true))
       dispatch(setAppStatus('succeeded'))
+      dispatch(setAppError(null))
     } catch (e: any) {
       errorNetworkUtil(e, dispatch)
     } finally {

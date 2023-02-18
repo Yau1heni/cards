@@ -1,6 +1,5 @@
 import Slider from '@mui/material/Slider'
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { useAppSelector } from '../../../common/hooks/useAppSelector'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -8,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { setRange } from '../packsSlicer'
 import { useDebounce } from '../../../common/hooks/useDebounce'
-import { selectPacksMaxCount, selectPacksMinCount } from '../../../common/selectors/packsSelectors'
 
 const valueText = (value: number) => `${value}`
 
@@ -16,9 +14,7 @@ const MIN_DISTANCE = 10
 
 export const SliderRange = () => {
   const dispatch = useAppDispatch()
-  const maxCardsCount = useAppSelector(selectPacksMaxCount)
-  const minCardsCount = useAppSelector(selectPacksMinCount)
-  const [value, setValue] = useState([minCardsCount, maxCardsCount])
+  const [value, setValue] = useState([1, 100])
 
   const minValueCount = useDebounce(value[0], 1000)
   const maxValueCount = useDebounce(value[1], 1000)
@@ -69,8 +65,8 @@ export const SliderRange = () => {
             sx={{ width: 70 }}
             size="small"
             inputProps={{
-              min: minCardsCount,
-              max: maxCardsCount,
+              min: 1,
+              max: 100,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
@@ -83,7 +79,7 @@ export const SliderRange = () => {
             onChange={handleSliderChange}
             valueLabelDisplay="auto"
             getAriaValueText={valueText}
-            max={maxCardsCount}
+            max={100}
             disableSwap
           />
         </Grid>
@@ -94,8 +90,8 @@ export const SliderRange = () => {
             sx={{ width: 70 }}
             size="small"
             inputProps={{
-              min: minCardsCount,
-              max: maxCardsCount,
+              min: 1,
+              max: 100,
               type: 'number',
             }}
           />

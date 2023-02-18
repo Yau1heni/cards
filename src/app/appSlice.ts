@@ -38,6 +38,7 @@ export const initializedApp = createAsyncThunk('app/initialized', async (arg, { 
     dispatch(setLoggedIn(true))
     dispatch(setUserData(res.data))
     dispatch(setAppStatus('succeeded'))
+    dispatch(setAppError(null))
   } catch (e: any) {
     errorNetworkUtil(e, dispatch)
   } finally {

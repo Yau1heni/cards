@@ -7,11 +7,9 @@ import { AppRootStateType } from '../../app/store'
 const initialState = {
   packs: [] as PackType[],
   cardPacksTotalCount: 0,
-  maxCardsCount: 100,
-  minCardsCount: 0,
   searchParams: {
-    max: 0,
-    min: 0,
+    max: 100,
+    min: 1,
     page: 1,
     pageCount: 4,
     packName: '',
