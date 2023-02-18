@@ -19,9 +19,7 @@ import { createNewPassword } from '../../authSlice'
 import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
 import { PATH } from '../../../../app/Pages/Pages'
 import { useAppSelector } from '../../../../common/hooks/useAppSelector'
-import {
-  selectAppIsSentPassword,
-} from '../../../../common/selectors/appSelectors'
+import { selectAppIsSentPassword } from '../../../../common/selectors/appSelectors'
 
 export const NewPassword = () => {
   const dispatch = useAppDispatch()

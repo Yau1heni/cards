@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { formatingDate } from '../../common/utils/formatDate'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
 import { PackType } from '../../api/cardsApi/packsAPI'
+import {selectProfileUserId} from '../../common/selectors/profileSelectors';
 
 export type PacksListTableRowPropsType = {
   pack: PackType
@@ -20,7 +21,7 @@ export const PackRow: FC<PacksListTableRowPropsType> = ({ pack }) => {
     if (pack.user_id) navigate(`/cards/${pack._id}`)
   }
 
-  const myUserId = useAppSelector((state) => state.profile.userData._id)
+  const myUserId = useAppSelector(selectProfileUserId)
   const isMyPack = pack.user_id === myUserId
 
   const tooltipWhosePack = isMyPack ? 'go to my pack' : 'go to friend pack'

@@ -15,24 +15,34 @@ import { SliderRange } from './SliderRange/SliderRange'
 import { TablePagination } from '../../common/components/TablePagination/TablePagination'
 import IconButton from '@mui/material/IconButton'
 import { SelectChangeEvent } from '@mui/material/Select'
+import {
+  selectPacksMax,
+  selectPacksMin,
+  selectPacksPage,
+  selectPacksPageCount,
+  selectPacksSearch,
+  selectPacksTotalCount,
+  selectPacksUserId,
+} from '../../common/selectors/packsSelectors'
+import {selectProfileUserId} from '../../common/selectors/profileSelectors';
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
 
-  const userId = useAppSelector((state) => state.profile.userData._id)
-  const page = useAppSelector((state) => state.packs.searchParams.page)
-  const id = useAppSelector((state) => state.packs.searchParams.user_id)
-  const pageCount = useAppSelector((state) => state.packs.searchParams.pageCount)
-  const cardPacksTotalCount = useAppSelector((state) => state.packs.cardPacksTotalCount)
-  const searchVal = useAppSelector((state) => state.packs.searchParams.packName)
-  const searchParamsMin = useAppSelector((state) => state.packs.searchParams.min)
-  const searchParamsMax = useAppSelector((state) => state.packs.searchParams.max)
+  const userId = useAppSelector(selectProfileUserId)
+  const page = useAppSelector(selectPacksPage)
+  const id = useAppSelector(selectPacksUserId)
+  const pageCount = useAppSelector(selectPacksPageCount)
+  const cardPacksTotalCount = useAppSelector(selectPacksTotalCount)
+  const searchValue = useAppSelector(selectPacksSearch)
+  const searchParamsMin = useAppSelector(selectPacksMin)
+  const searchParamsMax = useAppSelector(selectPacksMax)
 
   const [whosePacks, setWhosePacks] = React.useState('all')
 
   useEffect(() => {
     dispatch(getPacks())
-  }, [page, pageCount, searchVal, dispatch, searchParamsMin, searchParamsMax, id])
+  }, [page, pageCount, searchValue, dispatch, searchParamsMin, searchParamsMax, id])
 
   const handleSetPage = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value))

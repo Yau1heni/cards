@@ -1,10 +1,14 @@
 import Slider from '@mui/material/Slider'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useAppSelector } from '../../../common/hooks/useAppSelector'
-import { Box, Grid, OutlinedInput, Typography } from '@mui/material'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import Typography from '@mui/material/Typography'
 import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { setRange } from '../packsSlicer'
 import { useDebounce } from '../../../common/hooks/useDebounce'
+import { selectPacksMaxCount, selectPacksMinCount } from '../../../common/selectors/packsSelectors'
 
 const valueText = (value: number) => `${value}`
 
@@ -12,8 +16,8 @@ const MIN_DISTANCE = 10
 
 export const SliderRange = () => {
   const dispatch = useAppDispatch()
-  const maxCardsCount = useAppSelector((state) => state.packs.maxCardsCount)
-  const minCardsCount = useAppSelector((state) => state.packs.minCardsCount)
+  const maxCardsCount = useAppSelector(selectPacksMaxCount)
+  const minCardsCount = useAppSelector(selectPacksMinCount)
   const [value, setValue] = useState([minCardsCount, maxCardsCount])
 
   const minValueCount = useDebounce(value[0], 1000)

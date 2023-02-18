@@ -7,9 +7,10 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { PackRow } from './PackRow'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
+import {selectPacks} from '../../common/selectors/packsSelectors';
 
 export const PacksTable = () => {
-  const packs = useAppSelector((state) => state.packs.packs)
+  const packs = useAppSelector(selectPacks)
 
   const mappedPacks = packs.map((pack) => {
     return <PackRow key={pack._id} pack={pack} />
