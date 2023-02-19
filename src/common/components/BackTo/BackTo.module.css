@@ -1,0 +1,24 @@
+.navToMain {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.navToMain > a {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.navToMain > a:hover {
+  color: rgba(132, 137, 154, 0.85);
+}
+
+.navToMain > a > svg {
+  margin-right: 12px;
+}

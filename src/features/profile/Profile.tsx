@@ -10,6 +10,8 @@ import { Title } from '../../common/components/Title/Title'
 import { updateUserData } from './profileSlice'
 import { EditableSpan } from '../../common/components/EditableSpan/EditableSpan'
 import { selectProfileUser } from '../../common/selectors/profileSelectors'
+import { PATH } from '../../app/Pages/Pages'
+import { BackTo } from '../../common/components/BackTo/BackTo'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -26,6 +28,7 @@ export const Profile = () => {
 
   return (
     <div className={s.wrapper}>
+      <BackTo title={'Pack list'} direction={PATH.PACKS} />
       <Title title={'Personal Information'} />
       <img src={userAvatar} className={s.avatar} alt="avatar" />
       <div>

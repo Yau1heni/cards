@@ -1,7 +1,7 @@
 .wrapper {
   margin: auto;
-  max-width: 450px;
   max-height: 320px;
+  max-width: 1008px;
   text-align: center;
 }
 
@@ -13,4 +13,3 @@
   font-weight: 400;
   font-size: 14px;
 }
-
