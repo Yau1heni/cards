@@ -7,6 +7,7 @@ import { appReducer } from './appSlice'
 import { profileReducer } from '../features/profile/profileSlice'
 import { packsReducer } from '../features/packs/packsSlicer'
 import { cardsReducer } from '../features/cards/cardsSlice'
+import { learnReducer } from '../features/learn/learnSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     profile: profileReducer,
     packs: packsReducer,
     cards: cardsReducer,
+    learn: learnReducer,
   },
 })
 
