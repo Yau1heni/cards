@@ -5,6 +5,7 @@ import { useAppSelector } from '../common/hooks/useAppSelector'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
 import { initializedApp } from './appSlice'
 import LinearProgress from '@mui/material/LinearProgress'
+import { ErrorSnackbar } from '../common/components/ErrorSnackbar/ErrorSnackbar'
 
 function App() {
   const status = useAppSelector((s) => s.app.status)
@@ -25,6 +26,7 @@ function App() {
       <div className="App">
         <Pages />
       </div>
+      <ErrorSnackbar />
     </>
   )
 }
