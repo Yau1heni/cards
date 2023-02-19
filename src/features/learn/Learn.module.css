@@ -1,0 +1,15 @@
+.wrapper {
+  width: 1008px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperLearn {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: start;
+  width: 50%;
+}
