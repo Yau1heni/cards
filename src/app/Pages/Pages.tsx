@@ -9,6 +9,7 @@ import { NewPassword } from '../../features/auth/password/NewPassword/NewPasswor
 import { PrivateRoutes } from './PrivateRoutes'
 import { Cards } from '../../features/cards/Cards'
 import { Packs } from '../../features/packs/Packs'
+import { Learn } from '../../features/learn/Learn'
 
 export const PATH = {
   SIGN_UP: '/signup',
@@ -20,6 +21,7 @@ export const PATH = {
   CREATE_NEW_PASSWORD: '/create-new-password/:token',
   CARDS: '/cards/:packId',
   PACKS: '/packs',
+  LEARN: '/learn/:packId',
 }
 
 export const Pages = () => {
@@ -36,6 +38,7 @@ export const Pages = () => {
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.CARDS} element={<Cards />} />
         <Route path={PATH.PACKS} element={<Packs />} />
+        <Route path={PATH.LEARN} element={<Learn />} />
         <Route path={PATH.NOT_FOUND} element={<h1>404: PAGE NOT FOUND</h1>} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Route>

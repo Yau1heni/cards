@@ -1,0 +1,18 @@
+.wrapper {
+  width: 1008px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchWrapper {
+  display: flex;
+  align-content: center;
+  margin-bottom: 20px;
+}

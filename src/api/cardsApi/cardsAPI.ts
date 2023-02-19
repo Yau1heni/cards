@@ -7,7 +7,7 @@ export const cardsAPI = {
     })
   },
   postCard(card: CardType) {
-    return instance.post<ResponsePostCardType>('cards/card', card)
+    return instance.post<ResponsePostCardType>('cards/card', { card: card })
   },
   deleteCard(id: string) {
     return instance.delete<ResponseDeleteCardType>(`cards/card?id=${id}`)
@@ -29,6 +29,7 @@ export type ParamsTypeCards = {
 }
 
 export type CardType = {
+  _id?: string
   cardsPack_id: string
   question?: string
   answer?: string
