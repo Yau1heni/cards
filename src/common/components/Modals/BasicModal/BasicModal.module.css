@@ -1,0 +1,11 @@
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
