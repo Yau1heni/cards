@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/useAppSelector'
 import { selectPacksSort } from '../../selectors/packsSelectors'
 import TableCell from '@mui/material/TableCell'
 import { handleSortTable } from '../../utils/handleSortTable'
-import { setPacksSort } from '../../../features/packs/packsSlicer'
+import { setPacksSort } from '../../../features/packs/packsSlice'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import { setCardsSort } from '../../../features/cards/cardsSlice'
 

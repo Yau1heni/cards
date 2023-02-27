@@ -6,14 +6,14 @@ export const packsAPI = {
       params,
     })
   },
-  postPack(pack: CreatePackType) {
-    return instance.post<ResponsePostPackType>('cards/pack', pack)
+  createPack(payload: CreatePackType) {
+    return instance.post<ResponsePostPackType>('cards/pack', { cardsPack: payload })
   },
   deletePack(id: string) {
     return instance.delete<ResponseDeletePackType>(`cards/pack?id=${id}`)
   },
-  updatePack(pack: PackType) {
-    return instance.put<ResponseUpdatedPackType>('cards/pack', pack)
+  updatePack(payload: UpdatePackType) {
+    return instance.put<ResponseUpdatedPackType>('cards/pack', { cardsPack: payload })
   },
 }
 
@@ -38,18 +38,14 @@ export type ParamsTypePacks = {
 }
 
 export type CreatePackType = {
-  cardsPack: {
-    name?: string
-    deckCover?: string
-    private?: boolean
-  }
+  name: string
+  deckCover?: string
+  private?: boolean
 }
 
 export type UpdatePackType = {
-  cardsPack: {
-    _id: string
-    name?: string
-  }
+  _id: string
+  name: string
 }
 
 export type ResponsePacksType = {

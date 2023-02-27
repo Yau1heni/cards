@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import Typography from '@mui/material/Typography'
 import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
-import { setRange } from '../../packsSlicer'
+import { setRange } from '../../packsSlice'
 import { useDebounce } from '../../../../common/hooks/useDebounce'
 
 const valueText = (value: number) => `${value}`
@@ -14,7 +14,7 @@ const MIN_DISTANCE = 10
 
 export const SliderRange = () => {
   const dispatch = useAppDispatch()
-  const [value, setValue] = useState([1, 100])
+  const [value, setValue] = useState([0, 100])
 
   const minValueCount = useDebounce(value[0], 1000)
   const maxValueCount = useDebounce(value[1], 1000)

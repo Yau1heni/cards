@@ -6,8 +6,18 @@ import Button from '@mui/material/Button'
 import s from './BasicModal.module.css'
 import { Title } from '../../Title/Title'
 import CloseIcon from '@mui/icons-material/Close'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import Tooltip from '@mui/material/Tooltip'
 
-export const BasicModal: FC<BasicModalType> = ({ children, onClick, buttonType, title }) => {
+export const BasicModal: FC<BasicModalType> = ({
+  children,
+  onClick,
+  modalButtonType,
+  title,
+  openButtonName,
+  openButtonType,
+}) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -17,9 +27,37 @@ export const BasicModal: FC<BasicModalType> = ({ children, onClick, buttonType, 
     handleClose()
   }
 
+  const openButtonSwitch = (openButtonType: 'edit' | 'delete' | 'add') => {
+    switch (openButtonType) {
+      case 'edit':
+        return (
+          <Tooltip title={'edit'}>
+            <IconButton onClick={handleOpen}>
+              <EditIcon fontSize={'medium'} />
+            </IconButton>
+          </Tooltip>
+        )
+      case 'delete':
+        return (
+          <Tooltip title={'delete'}>
+            <IconButton onClick={handleOpen}>
+              <DeleteForeverIcon fontSize={'medium'} />
+            </IconButton>
+          </Tooltip>
+        )
+      case 'add':
+        return (
+          <Button variant={'contained'} onClick={handleOpen}>
+            {openButtonName}
+          </Button>
+        )
+    }
+  }
+
   return (
     <>
-      <Button onClick={handleOpen}>open</Button>
+      {openButtonType && openButtonSwitch(openButtonType)}
+
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <div className={s.headerWrapper}>
@@ -36,9 +74,9 @@ export const BasicModal: FC<BasicModalType> = ({ children, onClick, buttonType, 
             <Button
               onClick={handleSubmit}
               variant={'contained'}
-              color={buttonType === 'save' ? 'primary' : 'error'}
+              color={modalButtonType === 'save' ? 'primary' : 'error'}
             >
-              {buttonType}
+              {modalButtonType}
             </Button>
           </div>
         </Box>
@@ -50,8 +88,10 @@ export const BasicModal: FC<BasicModalType> = ({ children, onClick, buttonType, 
 type BasicModalType = {
   children: ReactNode
   onClick: () => void
-  buttonType: 'save' | 'delete'
+  modalButtonType: 'save' | 'delete'
   title: string
+  openButtonName?: string
+  openButtonType?: 'edit' | 'delete' | 'add'
 }
 
 const style = {

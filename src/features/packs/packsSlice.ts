@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { packsAPI, PackType, ParamsTypePacks } from '../../api/cardsApi/packsAPI'
-import { setAppStatus } from '../../app/appSlice'
+import {
+  CreatePackType,
+  packsAPI,
+  PackType,
+  ParamsTypePacks,
+  UpdatePackType,
+} from '../../api/cardsApi/packsAPI'
+import { setAppInitialized, setAppStatus } from '../../app/appSlice'
 import { errorNetworkUtil } from '../../common/utils/errorNetworkUtil'
 import { AppRootStateType } from '../../app/store'
 
@@ -9,7 +15,7 @@ const initialState = {
   cardPacksTotalCount: 0,
   searchParams: {
     max: 100,
-    min: 1,
+    min: 0,
     page: 1,
     pageCount: 4,
     packName: '',
@@ -89,59 +95,50 @@ export const getPacks = createAsyncThunk('packs/setPacks', async (_, { dispatch,
   }
 })
 
-// export const addNewPackTC = (newPackName: string): AppThunk => {
-//   return (dispatch) => {
-//     dispatch(setAppStatusAC('loading'))
-//     packAPI
-//       .postPack({ name: newPackName })
-//       .then(() => {
-//         dispatch(getPacksDataTC())
-//         dispatch(setAppStatusAC('succeeded'))
-//       })
-//       .catch((e: AxiosError<{ error: string }>) => {
-//         dispatch(setAppStatusAC('failed'))
-//         const error = e.response
-//           ? e.response.data.error
-//           : e.message + ', more details in the console'
-//         dispatch(setAppErrorAC(error))
-//       })
-//   }
-// }
-//
-// export const deletePackTC = (id: string): AppThunk => {
-//   return (dispatch) => {
-//     dispatch(setAppStatusAC('loading'))
-//     packAPI
-//       .deletePack(id)
-//       .then(() => {
-//         dispatch(getPacksDataTC())
-//         dispatch(setAppStatusAC('succeeded'))
-//       })
-//       .catch((e: AxiosError<{ error: string }>) => {
-//         dispatch(setAppStatusAC('failed'))
-//         const error = e.response
-//           ? e.response.data.error
-//           : e.message + ', more details in the console'
-//         dispatch(setAppErrorAC(error))
-//       })
-//   }
-// }
-//
-// export const updatePackTC = (cardsPack: CardPacksUpdateType): AppThunk => {
-//   return (dispatch) => {
-//     dispatch(setAppStatusAC('loading'))
-//     packAPI
-//       .updatePack(cardsPack)
-//       .then(() => {
-//         dispatch(getPacksDataTC())
-//         dispatch(setAppStatusAC('succeeded'))
-//       })
-//       .catch((e: AxiosError<{ error: string }>) => {
-//         dispatch(setAppStatusAC('failed'))
-//         const error = e.response
-//           ? e.response.data.error
-//           : e.message + ', more details in the console'
-//         dispatch(setAppErrorAC(error))
-//       })
-//   }
-// }
+export const addNewPack = createAsyncThunk(
+  'packs/addNewPack',
+  async (data: CreatePackType, { dispatch }) => {
+    dispatch(setAppStatus('loading'))
+    try {
+      await packsAPI.createPack(data)
+      dispatch(getPacks())
+      dispatch(setAppStatus('succeeded'))
+    } catch (e: any) {
+      errorNetworkUtil(e, dispatch)
+    } finally {
+      dispatch(setAppStatus('succeeded'))
+      dispatch(setAppInitialized(true))
+    }
+  },
+)
+
+export const deletePack = createAsyncThunk('packs/addNewPack', async (id: string, { dispatch }) => {
+  dispatch(setAppStatus('loading'))
+  try {
+    await packsAPI.deletePack(id)
+    dispatch(getPacks())
+    dispatch(setAppStatus('succeeded'))
+  } catch (e: any) {
+    errorNetworkUtil(e, dispatch)
+  } finally {
+    dispatch(setAppStatus('succeeded'))
+    dispatch(setAppInitialized(true))
+  }
+})
+
+export const updatePack = createAsyncThunk(
+  'packs/updatePack',
+  async (data: UpdatePackType, { dispatch }) => {
+    dispatch(setAppStatus('loading'))
+    try {
+      await packsAPI.updatePack(data)
+      dispatch(getPacks())
+      dispatch(setAppStatus('succeeded'))
+    } catch (e: any) {
+      errorNetworkUtil(e, dispatch)
+    } finally {
+      dispatch(setAppStatus('succeeded'))
+      dispatch(setAppInitialized(true))
+    }
+  },
+)

@@ -5,7 +5,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from '../features/auth/authSlice'
 import { appReducer } from './appSlice'
 import { profileReducer } from '../features/profile/profileSlice'
-import { packsReducer } from '../features/packs/packsSlicer'
+import { packsReducer } from '../features/packs/packsSlice'
 import { cardsReducer } from '../features/cards/cardsSlice'
 import { learnReducer } from '../features/learn/learnSlice'
 
