@@ -28,9 +28,9 @@ export const CardBody: FC<CardBodyPropsType> = ({ cards, removeCard, addCard, is
             <TableCell component="th" scope="row">
               {card.question}
             </TableCell>
-            <TableCell align={'right'}>{card.answer}</TableCell>
-            <TableCell align={'right'}>{formattedDate}</TableCell>
-            <TableCell align={'right'}>
+            <TableCell align={'left'}>{card.answer}</TableCell>
+            <TableCell align={'left'}>{formattedDate}</TableCell>
+            <TableCell align={'left'}>
               <Rating name="simple-controlled" value={card.grade} />
             </TableCell>
             {isMyCards && (
