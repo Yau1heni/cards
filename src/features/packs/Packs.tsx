@@ -1,19 +1,11 @@
 import React, { useEffect } from 'react'
-import FormControl from '@mui/material/FormControl'
-import ToggleButton from '@mui/material/ToggleButton'
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import Tooltip from '@mui/material/Tooltip'
 import s from './Packs.module.css'
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'
 import { useAppDispatch } from '../../common/hooks/useAppDispatch'
-import { TableSearchBar } from '../../common/components/TableSearchbar/TableSearchbar'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
-import { getPacks, setPage, setPageCount, setUserId } from './packsSlicer'
+import { getPacks, setPage, setPageCount } from './packsSlicer'
 import { Title } from '../../common/components/Title/Title'
-import { PacksTable } from './PacksTable'
-import { SliderRange } from './SliderRange/SliderRange'
+import { PacksTable } from './packsTable/PacksTable'
 import { TablePagination } from '../../common/components/TablePagination/TablePagination'
-import IconButton from '@mui/material/IconButton'
 import { SelectChangeEvent } from '@mui/material/Select'
 import {
   selectPacksMax,
@@ -21,28 +13,33 @@ import {
   selectPacksPage,
   selectPacksPageCount,
   selectPacksSearch,
+  selectPacksSort,
   selectPacksTotalCount,
   selectPacksUserId,
 } from '../../common/selectors/packsSelectors'
-import {selectProfileUserId} from '../../common/selectors/profileSelectors';
+import { PATH } from '../../app/Pages/Pages'
+import { BackTo } from '../../common/components/BackTo/BackTo'
+import { useDebounce } from '../../common/hooks/useDebounce'
+import Button from '@mui/material/Button'
+import { PacksTableToolbar } from './packsTable/PacksTableToolbar'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
 
-  const userId = useAppSelector(selectProfileUserId)
-  const page = useAppSelector(selectPacksPage)
   const id = useAppSelector(selectPacksUserId)
+  const page = useAppSelector(selectPacksPage)
   const pageCount = useAppSelector(selectPacksPageCount)
   const cardPacksTotalCount = useAppSelector(selectPacksTotalCount)
   const searchValue = useAppSelector(selectPacksSearch)
+  const sort = useAppSelector(selectPacksSort)
   const searchParamsMin = useAppSelector(selectPacksMin)
   const searchParamsMax = useAppSelector(selectPacksMax)
 
-  const [whosePacks, setWhosePacks] = React.useState('all')
+  const debouncedValue = useDebounce<string>(searchValue, 500)
 
   useEffect(() => {
     dispatch(getPacks())
-  }, [page, pageCount, searchValue, dispatch, searchParamsMin, searchParamsMax, id])
+  }, [page, pageCount, debouncedValue, searchParamsMin, id, searchParamsMax, sort])
 
   const handleSetPage = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value))
@@ -52,54 +49,26 @@ export const Packs = () => {
     dispatch(setPageCount(+event.target.value))
   }
 
-  const handleSetWhosePacks = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: 'all' | 'my',
-  ) => {
-    if (newAlignment !== null) {
-      setWhosePacks(newAlignment)
-      dispatch(setUserId(newAlignment === 'my' ? userId : ''))
-    }
-  }
-
   return (
-    <div>
-      <div className={s.wrapper}>
-        <div className={s.titleWrapper}>
-          <Title title={'Packs list'} />
-        </div>
-        <div className={s.toolbar}>
-          <TableSearchBar onChange={() => {}} />
-          <FormControl variant="standard">
-            <ToggleButtonGroup
-              color="primary"
-              value={whosePacks}
-              exclusive
-              onChange={handleSetWhosePacks}
-              aria-label="Platform"
-            >
-              <ToggleButton value="my">my</ToggleButton>
-              <ToggleButton value="all">all</ToggleButton>
-            </ToggleButtonGroup>
-          </FormControl>
-          <SliderRange />
-          <Tooltip title="clear filters">
-            <IconButton>
-              <FilterAltOffIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
-
-        <PacksTable />
-
-        <TablePagination
-          page={page}
-          pageCount={pageCount}
-          totalCountItems={cardPacksTotalCount}
-          handleSetPageCount={handleSetPageCount}
-          handleSetPage={handleSetPage}
-        />
+    <div className={s.wrapper}>
+      <BackTo title={'Profile'} direction={PATH.PROFILE} />
+      <div className={s.titleWrapper}>
+        <Title title={'Packs list'} />
+        <Button variant={'contained'} onClick={() => {}}>
+          Add new pack
+        </Button>
       </div>
+
+      <PacksTableToolbar />
+      <PacksTable />
+
+      <TablePagination
+        page={page}
+        pageCount={pageCount}
+        totalCountItems={cardPacksTotalCount}
+        handleSetPageCount={handleSetPageCount}
+        handleSetPage={handleSetPage}
+      />
     </div>
   )
 }

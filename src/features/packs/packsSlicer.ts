@@ -31,8 +31,11 @@ export const packsSlice = createSlice({
     setPageCount: (state, action: PayloadAction<number>) => {
       state.searchParams.pageCount = action.payload
     },
-    setSearch: (state, action: PayloadAction<string>) => {
+    setPacksSearch: (state, action: PayloadAction<string>) => {
       state.searchParams.packName = action.payload
+    },
+    setPacksSort: (state, action: PayloadAction<string>) => {
+      state.searchParams.sortPacks = action.payload
     },
     setRange: (state, action: PayloadAction<{ max: number; min: number }>) => {
       state.searchParams.min = action.payload.min
@@ -51,7 +54,8 @@ export const {
   setPacksData,
   setPage,
   setPageCount,
-  setSearch,
+  setPacksSearch,
+  setPacksSort,
   setRange,
   setUserId,
   setCardPacksTotalCount,

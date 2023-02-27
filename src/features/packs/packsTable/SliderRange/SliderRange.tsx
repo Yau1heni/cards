@@ -4,9 +4,9 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import Typography from '@mui/material/Typography'
-import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
-import { setRange } from '../packsSlicer'
-import { useDebounce } from '../../../common/hooks/useDebounce'
+import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
+import { setRange } from '../../packsSlicer'
+import { useDebounce } from '../../../../common/hooks/useDebounce'
 
 const valueText = (value: number) => `${value}`
 

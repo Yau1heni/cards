@@ -5,10 +5,10 @@ import TableRow from '@mui/material/TableRow'
 import Tooltip from '@mui/material/Tooltip'
 import SchoolIcon from '@mui/icons-material/School'
 import { useNavigate } from 'react-router-dom'
-import { formatingDate } from '../../common/utils/formatDate'
-import { useAppSelector } from '../../common/hooks/useAppSelector'
-import { PackType } from '../../api/cardsApi/packsAPI'
-import {selectProfileUserId} from '../../common/selectors/profileSelectors';
+import { formatingDate } from '../../../common/utils/formatDate'
+import { useAppSelector } from '../../../common/hooks/useAppSelector'
+import { PackType } from '../../../api/cardsApi/packsAPI'
+import { selectProfileUserId } from '../../../common/selectors/profileSelectors'
 
 export type PacksListTableRowPropsType = {
   pack: PackType
@@ -36,10 +36,10 @@ export const PackRow: FC<PacksListTableRowPropsType> = ({ pack }) => {
           <span>{pack.name}</span>
         </Tooltip>
       </TableCell>
-      <TableCell>{pack.cardsCount}</TableCell>
-      <TableCell>{formattedDate}</TableCell>
-      <TableCell>{pack.user_name}</TableCell>
-      <TableCell>
+      <TableCell align={'left'}>{pack.cardsCount}</TableCell>
+      <TableCell align={'left'}>{formattedDate}</TableCell>
+      <TableCell align={'left'}>{pack.user_name}</TableCell>
+      <TableCell align={'right'}>
         <Tooltip title={tooltipLearn}>
           <IconButton disabled={pack.cardsCount === 0}>
             <SchoolIcon />
