@@ -1,4 +1,4 @@
-import { cardsAPI, CardType } from '../../api/cardsApi/cardsAPI'
+import { cardsAPI, CardType, UpdateCardType } from '../../api/cardsApi/cardsAPI'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { setAppStatus } from '../../app/appSlice'
 import { errorNetworkUtil } from '../../common/utils/errorNetworkUtil'
@@ -86,7 +86,7 @@ export const addCard = createAsyncThunk('cards/addCard', async (card: CardType, 
   dispatch(setAppStatus('loading'))
 
   try {
-    const response = await cardsAPI.postCard(card)
+    const response = await cardsAPI.createCard(card)
     dispatch(getCards(response.data.newCard.cardsPack_id))
     dispatch(setAppStatus('succeeded'))
   } catch (e: any) {
@@ -109,3 +109,20 @@ export const removeCard = createAsyncThunk('cards/addCard', async (id: string, {
     dispatch(setAppStatus('idle'))
   }
 })
+
+export const updateCard = createAsyncThunk(
+  'cards/addCard',
+  async (data: UpdateCardType, { dispatch }) => {
+    dispatch(setAppStatus('loading'))
+
+    try {
+      const response = await cardsAPI.updateCard(data)
+      dispatch(getCards(response.data.updatedCard.cardsPack_id))
+      dispatch(setAppStatus('succeeded'))
+    } catch (e: any) {
+      errorNetworkUtil(e, dispatch)
+    } finally {
+      dispatch(setAppStatus('idle'))
+    }
+  },
+)

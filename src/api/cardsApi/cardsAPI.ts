@@ -6,14 +6,14 @@ export const cardsAPI = {
       params,
     })
   },
-  postCard(card: CardType) {
+  createCard(card: CardType) {
     return instance.post<ResponsePostCardType>('cards/card', { card: card })
   },
   deleteCard(id: string) {
     return instance.delete<ResponseDeleteCardType>(`cards/card?id=${id}`)
   },
-  updateCard(card: UpdateCardType) {
-    return instance.put<ResponseUpdatedCardType>('cards/card', card)
+  updateCard(payload: UpdateCardType) {
+    return instance.put<ResponseUpdatedCardType>('cards/card', { card: payload })
   },
 }
 
@@ -45,7 +45,7 @@ export type CardType = {
 export type UpdateCardType = {
   _id: string
   question: string
-  answer?: string
+  answer: string
 }
 export type ResponseCardsType = {
   cards: Array<CardType>

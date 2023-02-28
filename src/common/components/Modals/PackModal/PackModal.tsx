@@ -1,4 +1,4 @@
-import { BasicModal } from '../BasicModal/BasicModal'
+import { BasicModal, OpenButtonType } from '../BasicModal/BasicModal'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import React, { FC, useState } from 'react'
@@ -56,7 +56,7 @@ export const PackModal: FC<AddPackModalPropsType> = ({
 type AddPackModalPropsType = {
   titleModal: string
   openButtonName?: string
-  openButtonType?: 'edit' | 'delete' | 'add'
+  openButtonType?: OpenButtonType
   id?: string
   onClick?: () => void
   packName?: string

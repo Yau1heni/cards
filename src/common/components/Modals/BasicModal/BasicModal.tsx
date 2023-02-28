@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import Tooltip from '@mui/material/Tooltip'
+import AddIcon from '@mui/icons-material/Add'
 
 export const BasicModal: FC<BasicModalType> = ({
   children,
@@ -27,7 +28,7 @@ export const BasicModal: FC<BasicModalType> = ({
     handleClose()
   }
 
-  const openButtonSwitch = (openButtonType: 'edit' | 'delete' | 'add') => {
+  const openButtonSwitch = (openButtonType: OpenButtonType) => {
     switch (openButtonType) {
       case 'edit':
         return (
@@ -50,6 +51,14 @@ export const BasicModal: FC<BasicModalType> = ({
           <Button variant={'contained'} onClick={handleOpen}>
             {openButtonName}
           </Button>
+        )
+      case 'addIcon':
+        return (
+          <Tooltip title={'add card'}>
+            <IconButton onClick={handleOpen}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
         )
     }
   }
@@ -91,8 +100,10 @@ type BasicModalType = {
   modalButtonType: 'save' | 'delete'
   title: string
   openButtonName?: string
-  openButtonType?: 'edit' | 'delete' | 'add'
+  openButtonType?: OpenButtonType
 }
+
+export type OpenButtonType = 'edit' | 'delete' | 'add' | 'addIcon'
 
 const style = {
   position: 'absolute' as 'absolute',

@@ -5,19 +5,26 @@ import Rating from '@mui/material/Rating'
 import { formatingDate } from '../../../common/utils/formatDate'
 import { CardType } from '../../../api/cardsApi/cardsAPI'
 import { TableCell } from '@mui/material'
+import { DeleteModal } from '../../../common/components/Modals/DeleteModal/DeleteModal'
+import { CardModal } from '../../../common/components/Modals/CardModal/CardModal'
+import SchoolIcon from '@mui/icons-material/School'
 import IconButton from '@mui/material/IconButton'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import AddIcon from '@mui/icons-material/Add'
-import Tooltip from '@mui/material/Tooltip'
+import { useNavigate, useParams } from 'react-router-dom'
 
 type CardBodyPropsType = {
   cards: CardType[]
   removeCard: (id: string) => void
-  addCard: (newQuestion: string, newAnswer: string) => void
   isMyCards: boolean
 }
 
-export const CardBody: FC<CardBodyPropsType> = ({ cards, removeCard, addCard, isMyCards }) => {
+export const CardBody: FC<CardBodyPropsType> = ({ cards, removeCard, isMyCards }) => {
+  const navigate = useNavigate()
+  const { packId } = useParams()
+
+  const handleNavigateToLearn = () => {
+    navigate(`/learn/${packId}`)
+  }
+
   return (
     <TableBody>
       {cards.map((card) => {
@@ -35,16 +42,11 @@ export const CardBody: FC<CardBodyPropsType> = ({ cards, removeCard, addCard, is
             </TableCell>
             {isMyCards && (
               <TableCell align={'right'}>
-                <Tooltip title={'remove card'}>
-                  <IconButton onClick={() => removeCard(cardId)}>
-                    <DeleteForeverIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={'add card'}>
-                  <IconButton onClick={() => addCard('new question', 'new answer')}>
-                    <AddIcon />
-                  </IconButton>
-                </Tooltip>
+                <DeleteModal name={'remove card'} onClick={() => removeCard(cardId)} />
+                <CardModal titleModal={'Edit card'} openButtonType={'edit'} cardId={card._id} />
+                <IconButton title={'learn pack'} onClick={handleNavigateToLearn}>
+                  <SchoolIcon />
+                </IconButton>
               </TableCell>
             )}
           </TableRow>

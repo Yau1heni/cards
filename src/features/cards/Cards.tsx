@@ -3,14 +3,13 @@ import Table from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
 import Paper from '@mui/material/Paper'
 import { SelectChangeEvent } from '@mui/material'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../common/hooks/useAppDispatch'
 import { useDebounce } from '../../common/hooks/useDebounce'
 import { TableSearchBar } from '../../common/components/TableSearchbar/TableSearchbar'
 import { CardBody } from './cardsTable/CardBody'
 import { useAppSelector } from '../../common/hooks/useAppSelector'
 import {
-  addCard,
   getCards,
   removeCard,
   setCardSearchWord,
@@ -21,7 +20,6 @@ import { TablePagination } from '../../common/components/TablePagination/TablePa
 import s from './Cards.module.css'
 import { Title } from '../../common/components/Title/Title'
 import { CardHead } from './cardsTable/CardHead'
-import Button from '@mui/material/Button'
 import { BackTo } from '../../common/components/BackTo/BackTo'
 import { PATH } from '../../app/Pages/Pages'
 import {
@@ -34,12 +32,11 @@ import {
   selectCardsUserId,
 } from '../../common/selectors/cardsSelectors'
 import { selectProfileUserId } from '../../common/selectors/profileSelectors'
+import { CardModal } from '../../common/components/Modals/CardModal/CardModal'
 
 export const Cards = () => {
   const dispatch = useAppDispatch()
   const { packId } = useParams()
-
-  const navigate = useNavigate()
 
   const cards = useAppSelector(selectCards)
   const page = useAppSelector(selectCardsPage)
@@ -72,24 +69,8 @@ export const Cards = () => {
     dispatch(setCardsPageCount(+event.target.value))
   }
 
-  const handleAddCard = (newQuestion: string, newAnswer: string) => {
-    if (packId) {
-      dispatch(
-        addCard({
-          cardsPack_id: packId,
-          question: newQuestion,
-          answer: newAnswer,
-        }),
-      )
-    }
-  }
-
   const handleRemoveCard = (id: string) => {
     dispatch(removeCard(id))
-  }
-
-  const handleNavigateToLearn = () => {
-    navigate(`/learn/${packId}`)
   }
 
   return (
@@ -97,9 +78,12 @@ export const Cards = () => {
       <BackTo title={'Pack list'} direction={PATH.PACKS} />
       <div className={s.titleWrapper}>
         <Title title={isMyCards ? 'My pack' : "Friend's pack"} />
-        <Button variant={'contained'} onClick={handleNavigateToLearn}>
-          Learn pack
-        </Button>
+        <CardModal
+          titleModal={'Add card'}
+          openButtonName={'add card'}
+          packId={packId}
+          openButtonType={'add'}
+        />
       </div>
       {cardTotalCount === 0 ? (
         <div>Pack is empty</div>
@@ -108,17 +92,14 @@ export const Cards = () => {
           <div className={s.searchWrapper}>
             <TableSearchBar onChange={handleSetSearch} />
           </div>
+
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <CardHead />
-              <CardBody
-                cards={cards}
-                addCard={handleAddCard}
-                removeCard={handleRemoveCard}
-                isMyCards={isMyCards}
-              />
+              <CardBody cards={cards} removeCard={handleRemoveCard} isMyCards={isMyCards} />
             </Table>
           </TableContainer>
+
           <TablePagination
             pageCount={pageCount}
             totalCountItems={cardTotalCount}
