@@ -44,8 +44,9 @@ export const login = createAsyncThunk(
   async (data: CreateUserDataType, { dispatch }) => {
     dispatch(setAppStatus('loading'))
     try {
-      await authAPI.loginUser(data)
+      const res = await authAPI.loginUser(data)
 
+      dispatch(setUserData(res.data))
       dispatch(setLoggedIn(true))
       dispatch(setAppStatus('succeeded'))
       dispatch(setAppError(null))
@@ -63,7 +64,7 @@ export const register = createAsyncThunk(
   async (data: CreateUserDataType, { dispatch }) => {
     dispatch(setAppStatus('loading'))
     try {
-      await authAPI.registerUser(data)
+      const res = await authAPI.registerUser(data)
 
       dispatch(setRegistration(true))
       dispatch(setAppStatus('succeeded'))
